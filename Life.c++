@@ -87,4 +87,4 @@ void Cell::evolve (int n) {
     if (_cell->currentAge() == 2) mutate();
 }
 
-Cell::~Cell() {if (_cell) delete _cell;}
+Cell::~Cell() {}//if (_cell) delete _cell;}

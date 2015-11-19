@@ -15,6 +15,8 @@
 
 using namespace std;
 
+extern bool input;
+
 // -------------
 // AbstractCell Class
 // -------------
@@ -116,10 +118,6 @@ class Cell {
 		bool isAlive();
 		bool isFred();
 
-		AbstractCell& operator*() {
-			return *(this->_cell);
-		}
-
 		Cell* operator-> () {
    			return this;
    		}
@@ -168,6 +166,7 @@ class Life {
         vector<vector<T>> _cells;
         vector<vector<int>> _neighbors;
 
+
         // -------------
 		// read
 		// -------------
@@ -189,7 +188,6 @@ class Life {
 		    _neighbors = vector<vector<int>>(_rows + 2, vector<int>(_cols + 2, 0));
 
 		    _gens.resize(_evol + 1);
-		    _gens[0] = "Generation 0: \n";
 
 		    T x;
 		    make_vector(x, _r);
@@ -209,9 +207,7 @@ class Life {
 		            if ((s[j] != '.') && (s[j] != '-')) _pop++;
 		            T x(s[j]);
 		            _cells[i][j] = x;
-		            _gens[0] = _gens[0] + char(_cells[i][j]);
 		        }
-		        _gens[0] = _gens[0] + "\n";
 		    }
 		};
 
@@ -226,14 +222,11 @@ class Life {
 		            if ((s[j] == '*') || (s[j] == '.')) {
 		                Cell x = new ConwayCell(s[j]);
 		                _cells[i][j] = x;
-		                _gens[0] = _gens[0] + char(_cells[i][j]);
 		            } else {
 		                Cell x = new FredkinCell(s[j]);
 		                _cells[i][j] = x;
-		                _gens[0] = _gens[0] + char(_cells[i][j]);
 		            }
 		        }
-		        _gens[0] = _gens[0] + "\n";
 		    }
 		};
 
@@ -258,16 +251,20 @@ class Life {
 		// -------------
 		// print
 		// -------------
-		void print (ostream& _w) {
-		    _w << "*** " << "Life<" << _type << "> " << _rows << "x" << _cols << " ***" << "\n\n";
-		    _w << "Generation = " << _gen << ", Population = " << _pop << "." << "\n";
+		void write (ostream& _w, int _g) {
+			bool print = false;
+			if (((_outFreq != 0) && (!(_g % _outFreq))) || (_g == 0)) print = true;
+		    if (input && print) _w << "\n";
+		    _gens[_g] = "*** Life<" + _type + "> " + to_string(_rows) + "x" + to_string(_cols) + " ***\n\n";
+		    _gens[_g] = _gens[_g] + "Generation = " + to_string(_gen) + ", Population = " + to_string(_pop) + ".\n";
 		    for (int i = 1; i < _rows + 1; ++i) {
 		        for (int j = 1; j < _cols + 1; ++j) {
-		            _w << _cells[i][j];
+		            _gens[_g] = _gens[_g] + char(_cells[i][j]);
 		        }
-		        _w << "\n";
+		        _gens[_g] = _gens[_g] + "\n";
 		    }
-		    _w << "\n";
+			if (print) _w << _gens[_g];
+			input = true;
 		};
 
     public:
@@ -283,25 +280,23 @@ class Life {
 		// run
 		// -------------
 
-		void run (istream& r, ostream& w) {
+		void evolve (istream& r, ostream& w) {
 		    read(r);
 		    neighborsCount();
-		    print(w); 
+		    write(w, 0); 
 		    for (int g = 1; g <= _evol; ++g) {
 		        _pop = 0;
 		        _gen++;
-		        _gens[g] = "Generation " + to_string(g) + ": \n";
 		        for (int i = 1; i < _rows + 1; ++i) {
 		            for (int j = 1; j < _cols + 1; ++j) {
 		                _cells[i][j]->evolve(_neighbors[i][j]);
 		                if (_cells[i][j]->isAlive()) ++_pop;
-		                _gens[g] = _gens[g] + char(_cells[i][j]);
-		            }
-		            _gens[g] = _gens[g] + "\n";          
+		            }       
 		        }
 		        neighborsCount();
-		        if (!(g % _outFreq)) print(w);
+		        write(w, g);
 		    }
+
 		};
 
 		Life* operator-> () {

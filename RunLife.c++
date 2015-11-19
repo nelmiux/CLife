@@ -10,6 +10,8 @@
 
 #include "Life.h"
 
+bool input = false;
+
 // ----
 // main
 // ----
@@ -21,15 +23,15 @@ int main () {
         s = s.substr(0, s.size() - 1);
         if (s.compare("ConwayCell") == 0) {
             Life<ConwayCell> l(s);
-            l->run(cin, cout);
+            l->evolve(cin, cout);
         };
         if (s.compare("FredkinCell") == 0) {
             Life<FredkinCell> l(s);
-            l->run(cin, cout);
+            l->evolve(cin, cout);
         };
         if (s.compare("Cell") == 0) {
             Life<Cell> l(s);
-            l->run(cin, cout);
+            l->evolve(cin, cout);
         };
         getline(cin, s);
     }
