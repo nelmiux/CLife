@@ -1,9 +1,9 @@
 FILES :=                              \
     .travis.yml                       \
-    #life-tests/np8259-RunLife.in   \
-    #life-tests/np8259-RunLife.out  \
-    #life-tests/np8259-TestLife.c++ \
-    #life-tests/np8259-TestLife.out \
+    life-tests/np8259-RunLife.in   \
+    life-tests/np8259-RunLife.out  \
+    life-tests/np8259-TestLife.c++ \
+    life-tests/np8259-TestLife.out \
     Life.c++                       \
     Life.h                         \
     Life.log                       \
@@ -84,7 +84,7 @@ Doxyfile:
 	doxygen -g
 
 RunLife: Life.h Life.c++ RunLife.c++
-	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) Life.c++ RunLife.c++ -o RunLife -g
+	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) Life.c++ RunLife.c++ -o RunLife
 
 RunLife.out: RunLife
 	./RunLife < RunLife.in > RunLife.out

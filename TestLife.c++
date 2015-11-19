@@ -689,5 +689,3 @@ TEST(LifeFixture, mutateCell_5) {
     ASSERT_FALSE(cell4->isAlive());
 
 }
-
-
