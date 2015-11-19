@@ -109,6 +109,11 @@ class Cell {
 		AbstractCell* _cell;
 		string _type;
 		void mutate();
+
+		FRIEND_TEST(LifeFixture, mutateCell_3);
+		FRIEND_TEST(LifeFixture, mutateCell_4);
+		FRIEND_TEST(LifeFixture, mutateCell_5);
+
 	public:
 		Cell() {};
 		Cell(AbstractCell*);
@@ -134,8 +139,7 @@ class Cell {
 		    /* check for self-assignment */
 		    if (this == &c)
 		        return *this;
-		 
-		 	if (_cell) delete _cell;
+
 		 	/*
 		 	 * it does not create other pointer just copy source to dest
 			 * and overrrides sources
@@ -221,10 +225,12 @@ class Life {
 		            if ((s[j] != '.') && (s[j] != '-')) _pop++;
 		            if ((s[j] == '*') || (s[j] == '.')) {
 		                Cell x = new ConwayCell(s[j]);
-		                _cells[i][j] = x;
+		                y = x;
+		                _cells[i][j] = y;
 		            } else {
 		                Cell x = new FredkinCell(s[j]);
-		                _cells[i][j] = x;
+		                y = x;
+		                _cells[i][j] = y;
 		            }
 		        }
 		    }
@@ -266,6 +272,10 @@ class Life {
 			if (print) _w << _gens[_g];
 			input = true;
 		};
+
+		FRIEND_TEST(LifeFixture, addCelltoLife_1);
+		FRIEND_TEST(LifeFixture, addCelltoLife_2);
+		FRIEND_TEST(LifeFixture, addCelltoLife_3);
 
     public:
 

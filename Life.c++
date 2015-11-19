@@ -67,14 +67,14 @@ void FredkinCell::evolve (int n) {
 }
 
 
-Cell::Cell(AbstractCell* cell): _cell(cell) {}
+Cell::Cell(AbstractCell* cell): _cell(cell ? cell : 0) {}
 
 Cell::Cell(const Cell& c) {
     _cell = c._cell->clone();
 }
 
 void Cell::mutate () {
-    if (_cell) delete _cell;
+    delete _cell;
     _cell = new ConwayCell('*');
 }
 
@@ -87,4 +87,4 @@ void Cell::evolve (int n) {
     if (_cell->currentAge() == 2) mutate();
 }
 
-Cell::~Cell() {}//if (_cell) delete _cell;}
+Cell::~Cell() {delete _cell;}
