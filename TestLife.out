@@ -1,96 +1,96 @@
-==21571== Memcheck, a memory error detector
-==21571== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
-==21571== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
-==21571== Command: ./TestLife
-==21571== 
+==22027== Memcheck, a memory error detector
+==22027== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==22027== Using Valgrind-3.10.0.SVN and LibVEX; rerun with -h for copyright info
+==22027== Command: ./TestLife
+==22027== 
 Running main() from gtest_main.cc
 [==========] Running 32 tests from 1 test case.
 [----------] Global test environment set-up.
 [----------] 32 tests from LifeFixture
 [ RUN      ] LifeFixture.iterable_1
-[       OK ] LifeFixture.iterable_1 (408 ms)
+[       OK ] LifeFixture.iterable_1 (323 ms)
 [ RUN      ] LifeFixture.iterable_2
-[       OK ] LifeFixture.iterable_2 (243 ms)
+[       OK ] LifeFixture.iterable_2 (116 ms)
 [ RUN      ] LifeFixture.iterable_3
-[       OK ] LifeFixture.iterable_3 (170 ms)
+[       OK ] LifeFixture.iterable_3 (115 ms)
 [ RUN      ] LifeFixture.indexable_1
-[       OK ] LifeFixture.indexable_1 (30 ms)
+[       OK ] LifeFixture.indexable_1 (20 ms)
 [ RUN      ] LifeFixture.indexable_2
-[       OK ] LifeFixture.indexable_2 (37 ms)
+[       OK ] LifeFixture.indexable_2 (24 ms)
 [ RUN      ] LifeFixture.indexable_3
-[       OK ] LifeFixture.indexable_3 (40 ms)
+[       OK ] LifeFixture.indexable_3 (24 ms)
 [ RUN      ] LifeFixture.addCelltoLife_1
-[       OK ] LifeFixture.addCelltoLife_1 (18 ms)
+[       OK ] LifeFixture.addCelltoLife_1 (14 ms)
 [ RUN      ] LifeFixture.addCelltoLife_2
 [       OK ] LifeFixture.addCelltoLife_2 (14 ms)
 [ RUN      ] LifeFixture.addCelltoLife_3
-[       OK ] LifeFixture.addCelltoLife_3 (13 ms)
+[       OK ] LifeFixture.addCelltoLife_3 (31 ms)
 [ RUN      ] LifeFixture.evolveLife_1
-[       OK ] LifeFixture.evolveLife_1 (34 ms)
+[       OK ] LifeFixture.evolveLife_1 (83 ms)
 [ RUN      ] LifeFixture.evolveLife_2
-[       OK ] LifeFixture.evolveLife_2 (86 ms)
+[       OK ] LifeFixture.evolveLife_2 (151 ms)
 [ RUN      ] LifeFixture.evolveLife_3
-[       OK ] LifeFixture.evolveLife_3 (5241 ms)
+[       OK ] LifeFixture.evolveLife_3 (3861 ms)
 [ RUN      ] LifeFixture.evolveCell_1
-[       OK ] LifeFixture.evolveCell_1 (6 ms)
+[       OK ] LifeFixture.evolveCell_1 (7 ms)
 [ RUN      ] LifeFixture.evolveCell_2
-[       OK ] LifeFixture.evolveCell_2 (7 ms)
+[       OK ] LifeFixture.evolveCell_2 (6 ms)
 [ RUN      ] LifeFixture.evolveCell_3
-[       OK ] LifeFixture.evolveCell_3 (6 ms)
+[       OK ] LifeFixture.evolveCell_3 (4 ms)
 [ RUN      ] LifeFixture.evolveCell_4
-[       OK ] LifeFixture.evolveCell_4 (6 ms)
+[       OK ] LifeFixture.evolveCell_4 (5 ms)
 [ RUN      ] LifeFixture.evolveCell_5
-[       OK ] LifeFixture.evolveCell_5 (6 ms)
+[       OK ] LifeFixture.evolveCell_5 (5 ms)
 [ RUN      ] LifeFixture.evolveCell_6
-[       OK ] LifeFixture.evolveCell_6 (5 ms)
+[       OK ] LifeFixture.evolveCell_6 (6 ms)
 [ RUN      ] LifeFixture.evolveCell_7
 [       OK ] LifeFixture.evolveCell_7 (6 ms)
 [ RUN      ] LifeFixture.evolveCell_8
-[       OK ] LifeFixture.evolveCell_8 (7 ms)
+[       OK ] LifeFixture.evolveCell_8 (5 ms)
 [ RUN      ] LifeFixture.evolveCell_9
-[       OK ] LifeFixture.evolveCell_9 (7 ms)
+[       OK ] LifeFixture.evolveCell_9 (4 ms)
 [ RUN      ] LifeFixture.evolveCell_10
-[       OK ] LifeFixture.evolveCell_10 (6 ms)
+[       OK ] LifeFixture.evolveCell_10 (5 ms)
 [ RUN      ] LifeFixture.evolveCell_11
-[       OK ] LifeFixture.evolveCell_11 (7 ms)
+[       OK ] LifeFixture.evolveCell_11 (5 ms)
 [ RUN      ] LifeFixture.evolveCell_12
-[       OK ] LifeFixture.evolveCell_12 (11 ms)
+[       OK ] LifeFixture.evolveCell_12 (23 ms)
 [ RUN      ] LifeFixture.evolveCell_13
-[       OK ] LifeFixture.evolveCell_13 (9 ms)
+[       OK ] LifeFixture.evolveCell_13 (7 ms)
 [ RUN      ] LifeFixture.evolveCell_14
-[       OK ] LifeFixture.evolveCell_14 (9 ms)
+[       OK ] LifeFixture.evolveCell_14 (11 ms)
 [ RUN      ] LifeFixture.evolveCell_15
 [       OK ] LifeFixture.evolveCell_15 (10 ms)
 [ RUN      ] LifeFixture.mutateCell_1
-[       OK ] LifeFixture.mutateCell_1 (8 ms)
+[       OK ] LifeFixture.mutateCell_1 (12 ms)
 [ RUN      ] LifeFixture.mutateCell_2
-[       OK ] LifeFixture.mutateCell_2 (19 ms)
+[       OK ] LifeFixture.mutateCell_2 (22 ms)
 [ RUN      ] LifeFixture.mutateCell_3
-[       OK ] LifeFixture.mutateCell_3 (13 ms)
+[       OK ] LifeFixture.mutateCell_3 (10 ms)
 [ RUN      ] LifeFixture.mutateCell_4
-[       OK ] LifeFixture.mutateCell_4 (24 ms)
+[       OK ] LifeFixture.mutateCell_4 (9 ms)
 [ RUN      ] LifeFixture.mutateCell_5
-[       OK ] LifeFixture.mutateCell_5 (24 ms)
-[----------] 32 tests from LifeFixture (6616 ms total)
+[       OK ] LifeFixture.mutateCell_5 (10 ms)
+[----------] 32 tests from LifeFixture (5038 ms total)
 
 [----------] Global test environment tear-down
-[==========] 32 tests from 1 test case ran. (6851 ms total)
+[==========] 32 tests from 1 test case ran. (5116 ms total)
 [  PASSED  ] 32 tests.
-==21571== 
-==21571== HEAP SUMMARY:
-==21571==     in use at exit: 21,984 bytes in 916 blocks
-==21571==   total heap usage: 183,444 allocs, 182,528 frees, 74,948,498 bytes allocated
-==21571== 
-==21571== LEAK SUMMARY:
-==21571==    definitely lost: 21,984 bytes in 916 blocks
-==21571==    indirectly lost: 0 bytes in 0 blocks
-==21571==      possibly lost: 0 bytes in 0 blocks
-==21571==    still reachable: 0 bytes in 0 blocks
-==21571==         suppressed: 0 bytes in 0 blocks
-==21571== Rerun with --leak-check=full to see details of leaked memory
-==21571== 
-==21571== For counts of detected and suppressed errors, rerun with: -v
-==21571== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==22027== 
+==22027== HEAP SUMMARY:
+==22027==     in use at exit: 21,984 bytes in 916 blocks
+==22027==   total heap usage: 183,444 allocs, 182,528 frees, 74,948,504 bytes allocated
+==22027== 
+==22027== LEAK SUMMARY:
+==22027==    definitely lost: 21,984 bytes in 916 blocks
+==22027==    indirectly lost: 0 bytes in 0 blocks
+==22027==      possibly lost: 0 bytes in 0 blocks
+==22027==    still reachable: 0 bytes in 0 blocks
+==22027==         suppressed: 0 bytes in 0 blocks
+==22027== Rerun with --leak-check=full to see details of leaked memory
+==22027== 
+==22027== For counts of detected and suppressed errors, rerun with: -v
+==22027== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 File 'Life.c++'
 Lines executed:100.00% of 51
 Branches executed:100.00% of 50
