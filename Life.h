@@ -25,19 +25,36 @@ class AbstractCell {
 	protected:
 		char _sym;
    		bool _alive;
-   		int _pop;
-   		int _age;
    		virtual void mySym () = 0; 
    	public:
    		AbstractCell() {};
    		AbstractCell(char);
 
-   		virtual bool isAlive();
-   		virtual void evolve(int) = 0;
-            
-   		virtual AbstractCell* clone() const = 0;
-   		virtual int currentAge() = 0;
+   		/**
+   		 * Return -1 if the cell is dead.
+   		 * If the cell is Alive, return 1 in ConwayCell,
+   		 * the age in FredkinCell
+   		 * Pure virtual, implemented in children.
+   		 */
+   		virtual int isAlive() = 0;
+
+		/**
+   		 * Return true is the cells is FredkinCell, false otherwise
+   		 * Pure Virtual here, implemented in children classes.
+   		 */
    		virtual bool isFred() = 0;
+
+   		/**
+   		 * Clone this object
+   		 * Pure Virtual here, implemented in children classes.
+   		 */
+   		virtual AbstractCell* clone() const = 0;
+
+   		/**
+   		 * Execute cells evolutions following their rules
+   		 * Pure Virtual here, implemented in children classes.
+   		 */
+   		virtual void evolve(int) = 0;
 
    		virtual AbstractCell* operator-> () {
    			return this;
@@ -60,14 +77,37 @@ class AbstractCell {
 
 class ConwayCell: public AbstractCell {
 	private:
+		/**
+   		 * Use inside the object to define its symbol after
+   		 * an evolution process.
+   		 */
 		void mySym ();
 	public:
 		ConwayCell() {};
 		ConwayCell(char);
 
-		int currentAge();
+		/**
+   		 * Return 1 if the cell is alive, return -1 otherwise.
+   		 */
+		int isAlive();
+
+		/**
+   		 * Return false, since this is not FredkinCell object.
+   		 */
 		bool isFred();
+
+		/**
+   		 * Clone this object
+   		 */
 		ConwayCell* clone() const;
+
+		/**
+   		 * Execute cells evolutions following its rules,
+   		 * receive number of alive neighbors, and if there
+   		 * is 3 neighbors alive the cell become to live,
+   		 * if there is less than 2 o more than 3 neighbors
+   		 * alive the cell dies.
+   		 */
 		void evolve (int);
 
 		friend ostream& operator<< (ostream& o, ConwayCell c) {
@@ -83,14 +123,43 @@ class ConwayCell: public AbstractCell {
 
 class FredkinCell: public AbstractCell {
 	private:
+		/**
+   		 * Use inside the object to define its symbol after
+   		 * an evolution process.
+   		 */
 		void mySym ();
+
+		/**
+		 * Keep track of the age of the cell.
+		 */
+		int _age;
+
 	public:
 		FredkinCell() {};
 		FredkinCell(char);
 
-		int currentAge();
+		/**
+   		 * Return 1 if the cell is alive, return the current 
+   		 * age otherwise.
+   		 */
+		int isAlive();
+
+		/**
+   		 * Return true, since this is FredkinCell object.
+   		 */
 		bool isFred();
+
+		/**
+   		 * Clone this object.
+   		 */
 		FredkinCell* clone() const;
+
+		/**
+   		 * Execute cells evolutions following its rules,
+   		 * receive number of alive neighbors, and if the
+   		 * number of neighbors alive is odd the cell become 
+   		 * to live, if even or 0 the cell dies.
+   		 */
 		void evolve (int);
 
 		friend ostream& operator<< (ostream& o, FredkinCell c) {
@@ -106,8 +175,14 @@ class FredkinCell: public AbstractCell {
 
 class Cell {
 	private:
+		/**
+   		 * Pointer to a current AbstractCell received.
+   		 */
 		AbstractCell* _cell;
-		string _type;
+
+		/**
+   		 * Transform cell from anything to a live ConwayCell.
+   		 */
 		void mutate();
 
 		FRIEND_TEST(LifeFixture, mutateCell_3);
@@ -119,9 +194,22 @@ class Cell {
 		Cell(AbstractCell*);
 		Cell(const Cell&);
 
-		void evolve (int);
-		bool isAlive();
+		/**
+   		 * Return the isAlive() method of its corresponding object.
+   		 */
+		int isAlive();
+
+		/**
+   		 * Return the isFred() method of its corresponding object.
+   		 */
 		bool isFred();
+
+		/**
+   		 * Execute cells evolutions of its corresponding object,
+   		 * after the evolution if the cell is a FredkinCell and
+   		 * its age is 2, then cell mutates to a live ConwayCell.
+   		 */
+		void evolve (int);
 
 		Cell* operator-> () {
    			return this;
@@ -136,14 +224,10 @@ class Cell {
 		}
 
 		Cell& operator=(Cell& c) {
-		    /* check for self-assignment */
+		    // check for self-assignment
 		    if (this == &c)
 		        return *this;
 
-		 	/*
-		 	 * it does not create other pointer just copy source to dest
-			 * and overrrides sources
-			 */
 		    if (c._cell) {
 		    	_cell = c._cell->clone();
 		    } else
@@ -160,14 +244,49 @@ class Cell {
 template<typename T>
 class Life {
     private:
+    	/**
+   		 * Cell type.
+   		 */
         string _type;
+
+        /**
+   		 * Height of the grid.
+   		 */
         int _rows;
+
+        /**
+   		 * Width of the grid.
+   		 */
         int _cols;
+
+        /**
+   		 * Number of evolution to execute.
+   		 */
         int _evol;
+
+        /**
+   		 * Output frequency to print.
+   		 */
         int _outFreq;
+
+        /**
+   		 * Generations counter.
+   		 */
         int _gen;
+
+        /**
+   		 * Population counter.
+   		 */
         int _pop;
+
+        /**
+   		 * 2D representation of a grid of cells.
+   		 */
         vector<vector<T>> _cells;
+
+        /**
+   		 * 2D representation of a grid of cells alive neighbors.
+   		 */
         vector<vector<int>> _neighbors;
 
 
@@ -175,6 +294,11 @@ class Life {
 		// read
 		// -------------
 
+        /**
+   		 * Read values from std in and populate the grid with the
+   		 * received characters from std in.
+   		 * make the grid of the cells.
+   		 */
 		void read (istream& _r) {
 		    string s = ".";
 		    getline(_r, s);
@@ -201,6 +325,9 @@ class Life {
 		// make_vector
 		// -------------
 
+		/**
+   		 * Overloaded read method helper.
+   		 */
 		void make_vector(AbstractCell& a, istream& _r) {
 		     string s;
 		    _cells = vector<vector<T>>(_rows + 2, vector<T>(_cols + 2, T('.')));
@@ -215,6 +342,9 @@ class Life {
 		    }
 		};
 
+		/**
+   		 * Overloaded read method helper.
+   		 */
 		void make_vector(Cell& y, istream& _r) {
 		    string s;
 		    _cells = vector<vector<Cell>>(_rows + 2, vector<Cell>(_cols + 2, new FredkinCell('-')));
@@ -236,20 +366,25 @@ class Life {
 		    }
 		};
 
+
+		/**
+   		 * Count the number of alive neighbors of every cell and populate
+   		 * the mirror grid of neighbors.
+   		 */
 		void neighborsCount () {
 		    for (int i = 1; i < _rows + 1; ++i) {
 		        for (int j = 1; j < _cols + 1; ++j) {
 		            _neighbors[i][j] = 0;
-		            if (_cells[i - 1][j]->isAlive()) ++_neighbors[i][j];
-		            if (_cells[i + 1][j]->isAlive()) ++_neighbors[i][j];
-		            if (_cells[i][j - 1]->isAlive()) ++_neighbors[i][j];
-		            if (_cells[i][j + 1]->isAlive()) ++_neighbors[i][j];
-		            if (!(_cells[i][j]->isFred())) {
-		                if (_cells[i - 1][j - 1]->isAlive()) ++_neighbors[i][j];
-		                if (_cells[i - 1][j + 1]->isAlive()) ++_neighbors[i][j];
-		                if (_cells[i + 1][j + 1]->isAlive()) ++_neighbors[i][j];
-		                if (_cells[i + 1][j - 1]->isAlive()) ++_neighbors[i][j];
-		            }
+		            if (_cells[i - 1][j]->isAlive() > -1) ++_neighbors[i][j];
+		            if (_cells[i + 1][j]->isAlive() > -1) ++_neighbors[i][j];
+		            if (_cells[i][j - 1]->isAlive() > -1) ++_neighbors[i][j];
+		            if (_cells[i][j + 1]->isAlive() > -1) ++_neighbors[i][j];
+					if (!(_cells[i][j]->isFred())) {
+						if (_cells[i - 1][j - 1]->isAlive() > -1) ++_neighbors[i][j];
+			            if (_cells[i - 1][j + 1]->isAlive() > -1) ++_neighbors[i][j];
+			            if (_cells[i + 1][j + 1]->isAlive() > -1) ++_neighbors[i][j];
+			            if (_cells[i + 1][j - 1]->isAlive() > -1) ++_neighbors[i][j];
+			        }
 		        }
 		    }
 		};
@@ -257,6 +392,11 @@ class Life {
 		// -------------
 		// print
 		// -------------
+
+		/**
+   		 * Responsable to print the final result to std out and storage
+   		 * them, to be able to iterate through life.
+   		 */
 		void write (ostream& _w, int _g) {
 			bool print = false;
 			if (((_outFreq != 0) && (!(_g % _outFreq))) || (_g == 0)) print = true;
@@ -284,12 +424,19 @@ class Life {
 
         typedef vector<string> generations;
 
+        /**
+   		 * Vector of generations.
+   		 */
         generations _gens;
 
 		// -------------
 		// run
 		// -------------
 
+        /**
+   		 * Execute grid evolutions, creating generation states.
+   		 * main ejecutor of the simulation.
+   		 */
 		void evolve (istream& r, ostream& w) {
 		    read(r);
 		    neighborsCount();
@@ -300,7 +447,7 @@ class Life {
 		        for (int i = 1; i < _rows + 1; ++i) {
 		            for (int j = 1; j < _cols + 1; ++j) {
 		                _cells[i][j]->evolve(_neighbors[i][j]);
-		                if (_cells[i][j]->isAlive()) ++_pop;
+		                if (_cells[i][j]->isAlive() > -1) ++_pop;
 		            }       
 		        }
 		        neighborsCount();
@@ -313,40 +460,83 @@ class Life {
    			return this;
    		};
 
+   		/**
+		 * Life iterator definitions, helpers and operations.  
+		 */
    		typedef generations::iterator Iterator;
 		typedef generations::iterator* pointer;
 
 		Iterator it;
 
-		int size() {return _gens.size();}
+		int size() {
+			return _gens.size();
+		}
 
-  		const Iterator begin() {return _gens.begin();}
+		/**
+		 * Life iterator: begin  
+		 */
+  		const Iterator begin() {
+  			return _gens.begin();
+  		}
 
-		const Iterator end() {return _gens.end();}
+  		/**
+		 * Life iterator: end  
+		 */
+		const Iterator end() {
+			return _gens.end();
+		}
 
+		/**
+		 * Life iterator: post increment  
+		 */
 		Iterator operator++() {
 			Life<T>::Iterator i = (*this).it; 
 			_ptr++; 
 			return i; 
 		}
 
+		/**
+		 * Life iterator: pre increment  
+		 */
 		Iterator operator++(int junk) {
 			_ptr++; 
 			return this->it; 
 		}
 
-		bool operator==(const Life<T>& rhs) {return _ptr == rhs._ptr;}
+		/**
+		 * Life iterator: equal equal  
+		 */
+		bool operator==(const Life<T>& rhs) {
+			return _ptr == rhs._ptr;
+		}
 
-		bool operator!=(const Life<T>& rhs) {return _ptr != rhs._ptr;}
+		/**
+		 * Life iterator: not equal  
+		 */
+		bool operator!=(const Life<T>& rhs) {
+			return _ptr != rhs._ptr;
+		}
 
+		/**
+		 * Life iterator: return the value the 
+		 * iterator is pointing of  
+		 */
 		template<typename U>
-		U& operator* () {return *_ptr; }
+		U& operator* () {
+			return *_ptr; 
+		}
 
+		/**
+		 * Life iterator: at  
+		 */
 		const string& at(int i) const {
 			assert((i < int(_gens.size())) && (i >= 0));
 			return _gens.at(i); 
 		}
 
+		/**
+		 * Life iterator: indexing  
+		 */
 		string& operator[](int i) {
 		    assert((i < int(_gens.size())) && (i >= 0));
 		  	return _gens[i];

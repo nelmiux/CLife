@@ -214,13 +214,6 @@ TEST(LifeFixture, indexable_3) {
     }  
 }
 
-/*
-	results.push_back("");
-	results.push_back("");
-	results.push_back("");
-	results.push_back("");
-	results.push_back("");
-	results.push_back("");*/
 
 // ----
 // addCelltoLife
@@ -449,7 +442,7 @@ TEST(LifeFixture, evolveCell_1) {
 
     ASSERT_EQ(char(liveToDie0), '.');
 
-    ASSERT_FALSE(liveToDie0->isAlive());
+    ASSERT_EQ(liveToDie0->isAlive(), -1);
 }
 
 TEST(LifeFixture, evolveCell_2) {
@@ -460,7 +453,7 @@ TEST(LifeFixture, evolveCell_2) {
 
     ASSERT_EQ(char(liveToDie1), '.');
 
-    ASSERT_FALSE(liveToDie1->isAlive());
+    ASSERT_EQ(liveToDie1->isAlive(), -1);
 }
 
 TEST(LifeFixture, evolveCell_3) {
@@ -471,7 +464,7 @@ TEST(LifeFixture, evolveCell_3) {
 
     ASSERT_EQ(char(liveTolive), '*');
 
-    ASSERT_TRUE(liveTolive->isAlive());
+    ASSERT_EQ(liveTolive->isAlive(), 1);
 }
 
 TEST(LifeFixture, evolveCell_4) {
@@ -482,7 +475,7 @@ TEST(LifeFixture, evolveCell_4) {
 
     ASSERT_EQ(char(dieTolive), '*');
 
-    ASSERT_TRUE(dieTolive->isAlive());
+    ASSERT_EQ(dieTolive->isAlive(), 1);
 }
 
 TEST(LifeFixture, evolveCell_5) {
@@ -493,7 +486,7 @@ TEST(LifeFixture, evolveCell_5) {
 
     ASSERT_EQ(char(dieTodie), '.');
 
-    ASSERT_FALSE(dieTodie->isAlive());
+    ASSERT_EQ(dieTodie->isAlive(), -1);
     
 }
  
@@ -505,7 +498,7 @@ TEST(LifeFixture, evolveCell_6) {
 
     ASSERT_EQ(char(liveToDie0), '-');
 
-    ASSERT_FALSE(liveToDie0->isAlive());
+    ASSERT_EQ(liveToDie0->isAlive(), -1);
 }
 
 TEST(LifeFixture, evolveCell_7) {
@@ -516,7 +509,7 @@ TEST(LifeFixture, evolveCell_7) {
 
     ASSERT_EQ(char(liveToDie1), '-');
 
-    ASSERT_FALSE(liveToDie1->isAlive());
+    ASSERT_EQ(liveToDie1->isAlive(), -1);
 }
 
 TEST(LifeFixture, evolveCell_8) {
@@ -527,7 +520,7 @@ TEST(LifeFixture, evolveCell_8) {
 
     ASSERT_EQ(char(liveTolive), '1');
 
-    ASSERT_TRUE(liveTolive->isAlive());
+    ASSERT_EQ(liveTolive->isAlive(), 1);
 }
 
 TEST(LifeFixture, evolveCell_9) {
@@ -538,7 +531,7 @@ TEST(LifeFixture, evolveCell_9) {
 
     ASSERT_EQ(char(dieTolive), '0');
 
-    ASSERT_TRUE(dieTolive->isAlive());
+    ASSERT_EQ(dieTolive->isAlive(), 0);
 }
 
 TEST(LifeFixture, evolveCell_10) {
@@ -549,7 +542,7 @@ TEST(LifeFixture, evolveCell_10) {
 
     ASSERT_EQ(char(dieTodie), '-');
 
-    ASSERT_FALSE(dieTodie->isAlive());
+    ASSERT_EQ(dieTodie->isAlive(), -1);
 }
 
 TEST(LifeFixture, evolveCell_11) {
@@ -560,7 +553,7 @@ TEST(LifeFixture, evolveCell_11) {
 
     ASSERT_EQ(char(liveToDie0), '.');
 
-    ASSERT_FALSE(liveToDie0->isAlive());
+    ASSERT_EQ(liveToDie0->isAlive(), -1);
 }
 
 TEST(LifeFixture, evolveCell_12) {
@@ -571,7 +564,7 @@ TEST(LifeFixture, evolveCell_12) {
 
     ASSERT_EQ(char(liveToDie1), '-');
 
-    ASSERT_FALSE(liveToDie1->isAlive());
+    ASSERT_EQ(liveToDie1->isAlive(), -1);
 }
 
 TEST(LifeFixture, evolveCell_13) {
@@ -582,7 +575,7 @@ TEST(LifeFixture, evolveCell_13) {
 
     ASSERT_EQ(char(liveTolive), '1');
 
-    ASSERT_TRUE(liveTolive->isAlive());
+    ASSERT_EQ(liveTolive->isAlive(), 1);
 }
 
 TEST(LifeFixture, evolveCell_14) {
@@ -593,7 +586,7 @@ TEST(LifeFixture, evolveCell_14) {
 
     ASSERT_EQ(char(dieTolive), '*');
 
-    ASSERT_TRUE(dieTolive->isAlive());
+    ASSERT_EQ(dieTolive->isAlive(), 1);
 }
 
 TEST(LifeFixture, evolveCell_15) {
@@ -604,7 +597,7 @@ TEST(LifeFixture, evolveCell_15) {
 
     ASSERT_EQ(char(dieTodie), '.');
 
-    ASSERT_FALSE(dieTodie->isAlive());
+    ASSERT_EQ(dieTodie->isAlive(), -1);
    
 }
 
@@ -623,7 +616,7 @@ TEST(LifeFixture, mutateCell_1) {
 
     ASSERT_EQ(char(cell0), '*');
 
-    ASSERT_TRUE(cell0->isAlive());
+    ASSERT_EQ(cell0->isAlive(), 1);
 
 }
 
@@ -639,7 +632,7 @@ TEST(LifeFixture, mutateCell_2) {
 
     ASSERT_EQ(char(cell1), '*');
 
-    ASSERT_TRUE(cell1->isAlive());
+    ASSERT_EQ(cell1->isAlive(), 1);
     
 }
 
@@ -651,7 +644,7 @@ TEST(LifeFixture, mutateCell_3) {
 
     ASSERT_EQ(char(cell2), '*');
 
-    ASSERT_TRUE(cell2->isAlive());
+    ASSERT_EQ(cell2->isAlive(), 1);
 }
 
 TEST(LifeFixture, mutateCell_4) {
@@ -662,13 +655,13 @@ TEST(LifeFixture, mutateCell_4) {
 
     ASSERT_EQ(char(cell3), '*');
 
-    ASSERT_TRUE(cell3->isAlive());
+    ASSERT_EQ(cell3->isAlive(), 1);
 
     cell3->evolve(5);
 
     ASSERT_EQ(char(cell3), '.');
 
-    ASSERT_FALSE(cell3->isAlive());
+   ASSERT_EQ(cell3->isAlive(), -1);
 
 }
 
@@ -680,12 +673,12 @@ TEST(LifeFixture, mutateCell_5) {
 
     ASSERT_EQ(char(cell4), '*');
 
-    ASSERT_TRUE(cell4->isAlive());
+    ASSERT_EQ(cell4->isAlive(), 1);
 
     cell4->evolve(7);
 
     ASSERT_EQ(char(cell4), '.');
 
-    ASSERT_FALSE(cell4->isAlive());
+    ASSERT_EQ(cell4->isAlive(), -1);
 
 }

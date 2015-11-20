@@ -12,11 +12,7 @@
 
 using namespace std;
 
-AbstractCell::AbstractCell (char sym):_sym(sym), _alive(!((sym == '.') || (sym == '-'))), _age(0) {}
-
-bool AbstractCell::isAlive () {
-    return _alive;
-}
+AbstractCell::AbstractCell (char sym):_sym(sym), _alive(!((sym == '.') || (sym == '-'))) {}
 
 ConwayCell::ConwayCell (char sym): AbstractCell(sym) {}
 
@@ -25,11 +21,18 @@ void ConwayCell::mySym () {
     else _sym = '*';
 }
 
-int ConwayCell::currentAge() {return 0;}
+int ConwayCell::isAlive() {
+    if (_alive) return 1;
+    return -1;
+}
 
-bool ConwayCell::isFred() {return false;}
+bool ConwayCell::isFred() {
+    return false;
+}
 
-ConwayCell* ConwayCell::clone() const {return new ConwayCell(*this);}
+ConwayCell* ConwayCell::clone() const {
+    return new ConwayCell(*this);
+}
 
 void ConwayCell::evolve (int n) {
     bool _pre_alive = _alive;
@@ -39,7 +42,7 @@ void ConwayCell::evolve (int n) {
 }
 
 
-FredkinCell::FredkinCell(char sym): AbstractCell(sym) {}
+FredkinCell::FredkinCell(char sym): AbstractCell(sym), _age(0) {}
 
 void FredkinCell::mySym () {
     if (!_alive) {
@@ -52,9 +55,15 @@ void FredkinCell::mySym () {
     } else _sym = '+';
 }
 
-bool FredkinCell::isFred() {return true;}
+int FredkinCell::isAlive() {
+    if (_alive) return _age;
+    return -1;
+}
 
-int FredkinCell::currentAge() {return _age;}
+bool FredkinCell::isFred() {
+    return true;
+}
+
 
 FredkinCell* FredkinCell::clone() const {return new FredkinCell(*this);}
 
@@ -78,13 +87,19 @@ void Cell::mutate () {
     _cell = new ConwayCell('*');
 }
 
-bool Cell::isAlive() {return _cell->isAlive();}
+int Cell::isAlive() {
+    return _cell->isAlive();
+}
 
-bool Cell::isFred() {return _cell->isFred();}
+bool Cell::isFred() {
+    return _cell->isFred();
+}
 
 void Cell::evolve (int n) {
     _cell->evolve(n);
-    if (_cell->currentAge() == 2) mutate();
+    if (_cell->isAlive() == 2) mutate();
 }
 
-Cell::~Cell() {delete _cell;}
+Cell::~Cell() {
+    delete _cell;
+}
