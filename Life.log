@@ -1,0 +1,86 @@
+commit 989d3318c0aacdb4809d3f6a9be9349f0d2d9673
+Author: nelmiux <npererar@utexas.edu>
+Date:   Thu Nov 19 20:23:38 2015 -0600
+
+    Final test
+
+commit 90042e32bfe4be262e86ad2b898c0f7c4127df2f
+Author: Nelma Perera <npererar@utexas.edu>
+Date:   Thu Nov 19 20:19:16 2015 -0600
+
+    Update README.md
+
+commit aec3e1fca18c04682875895a95f719bfce4aebd2
+Merge: a0ea7c4 e07543c
+Author: Nelma Perera <npererar@utexas.edu>
+Date:   Thu Nov 19 20:18:28 2015 -0600
+
+    Merge pull request #18 from nelmiux/dev-branch
+    
+    Final Merge
+
+commit e07543cbada6128594dc4adc94dbe59ec2089c16
+Author: nelmiux <npererar@utexas.edu>
+Date:   Thu Nov 19 20:13:03 2015 -0600
+
+    UML Diagram
+
+commit 51d1cf7f3609db124986a4b78c9ee14302b4eb2c
+Author: nelmiux <npererar@utexas.edu>
+Date:   Thu Nov 19 19:22:44 2015 -0600
+
+    Documentation, closes #10
+
+commit b222d29308d9ae78bd93eb7f8cbb43c014a28461
+Author: nelmiux <npererar@utexas.edu>
+Date:   Thu Nov 19 07:42:21 2015 -0600
+
+    makefile ready
+
+commit 88fda4c27ee681ccb26f399e7fc666c0c66b514c
+Author: nelmiux <npererar@utexas.edu>
+Date:   Thu Nov 19 07:29:30 2015 -0600
+
+    closes #8
+
+commit e246c1f7a76f50d06c4343359f89fec26849911c
+Author: nelmiux <npererar@utexas.edu>
+Date:   Thu Nov 19 07:04:33 2015 -0600
+
+    closes #7
+
+commit cc2bb0492318f0cb24935c8144b65534acc1f9ba
+Author: nelmiux <npererar@utexas.edu>
+Date:   Thu Nov 19 02:48:00 2015 -0600
+
+    Some Tests
+
+commit 76483a3fa439f757dbe664c2a83aea3aadcbfe05
+Author: nelmiux <npererar@utexas.edu>
+Date:   Wed Nov 18 03:59:26 2015 -0600
+
+    closes #15, #16, #17
+
+commit 3a171935950f7df00c5f544a56638c0fe3f954c7
+Author: nelmiux <npererar@utexas.edu>
+Date:   Tue Nov 10 23:01:31 2015 -0600
+
+    Initial Commit
+
+commit 754648648fda852fd477fd6864b1b9de22ba5de1
+Author: nelmiux <npererar@utexas.edu>
+Date:   Tue Nov 10 22:58:06 2015 -0600
+
+    Initial Commit
+
+commit 72d14e734141d559719cf3dcf93cca542b7c6b22
+Author: Nelma Perera <npererar@utexas.edu>
+Date:   Tue Nov 10 22:28:29 2015 -0600
+
+    Update README.md
+
+commit a0ea7c4e9c580b939734b96564e4f7ccd1bf0b43
+Author: Nelma Perera <npererar@utexas.edu>
+Date:   Tue Nov 10 22:22:26 2015 -0600
+
+    Initial commit
