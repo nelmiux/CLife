@@ -1,9 +1,5 @@
 FILES :=                              \
     .travis.yml                       \
-    life-tests/np8259-RunLife.in   \
-    life-tests/np8259-RunLife.out  \
-    life-tests/np8259-TestLife.c++ \
-    life-tests/np8259-TestLife.out \
     Life.c++                       \
     Life.h                         \
     Life.log                       \
@@ -70,9 +66,6 @@ status:
 	git status
 
 test: RunLife.out TestLife.out
-
-life-tests:
-	git clone https://github.com/cs371p-fall-2015/life-tests.git
 
 html: Doxyfile Life.h Life.c++ RunLife.c++ TestLife.c++
 	doxygen Doxyfile
