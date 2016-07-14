@@ -1,4 +1,4 @@
 # Game of Life
 
 ## Status
-![Build Status](https://magnum.travis-ci.com/nelmiux/cs371p-life.svg?token=d7DyZsL5MGsgRrcqFYN1&branch=master)
+![Build Status](https://travis-ci.org/nelmiux/Game-Life.svg?branch=master)
